@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "fedev": "node ./server/fe-server.js",
-    "rddev": "webpack-dev-server --config webpack.config.rddev.js",
-    "dev": "npm run fedev",
+    "express": "node ./server/express-server.js",
+    "koa2": "node ./server/koa-server.js",
+    "dev": "npm run koa2",
     "review": "npm run webpack && npm run dev",
-    "webpack": "rm -rf ./build/public/* && webpack"
+    "webpack": "rm -rf ./public/build/* && webpack"
   },
   "author": "wanghongxin",
   "license": "ISC",
@@ -38,6 +38,8 @@
     "imports-loader": "^0.7.1",
     "koa": "^2.2.0",
     "koa-router": "^7.1.1",
+    "koa-webpack-dev-middleware": "^1.4.5",
+    "koa-webpack-hot-middleware": "^1.0.3",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
     "postcss-loader": "^1.3.3",
