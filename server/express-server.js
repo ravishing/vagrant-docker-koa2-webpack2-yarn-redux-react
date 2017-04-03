@@ -42,6 +42,6 @@ server.listen(80, "0.0.0.0", error=>{
     console.log(error.message);
     return
   }else{
-    console.log('server is listenning 127.0.0.1 for 80')
+    console.log('express...')
   }
 });

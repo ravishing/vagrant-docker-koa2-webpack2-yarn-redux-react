@@ -8,8 +8,8 @@ module.exports = {
          home:path.join(__dirname,'src/bootstrap/main.js'),
     },
     output:{
-        path:path.join(__dirname,'build','public'),
-        filename:'static/[name]-[hash].js',
+        path:path.join(__dirname,'public','build'),
+        filename:'static/[name]-[hash:8].js',
         publicPath:'http://d.ev/',
     },
     module:{
@@ -36,7 +36,6 @@ module.exports = {
         historyApiFallback:true,
         hot:true,
         inline:true,
-        // progress:true,
         host:'0.0.0.0',
         port:'80',
     },
