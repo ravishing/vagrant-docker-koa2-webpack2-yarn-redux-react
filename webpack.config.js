@@ -9,7 +9,7 @@ module.exports = {
     },
     output:{
         path:path.join(__dirname,'build','public'),
-        filename:'static/[name]+[hash].js',
+        filename:'static/[name]-[hash].js',
         publicPath:'http://d.ev/',
     },
     module:{
