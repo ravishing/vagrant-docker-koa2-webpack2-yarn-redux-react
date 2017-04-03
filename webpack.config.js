@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var WebpackMd5Hash = require('webpack-md5-hash');
 var path = require('path');
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
     },
     output:{
         path:path.join(__dirname,'public','build'),
-        filename:'static/[name]-[hash:8].js',
+        filename:'static/[name].[chunkhash:8].js',
         publicPath:'http://d.ev/',
     },
     module:{
@@ -30,6 +31,7 @@ module.exports = {
             template:'./src/resources/main/index.html',
         }),
         new webpack.HotModuleReplacementPlugin(),
+        new WebpackMd5Hash,
     ],
     devtool:'eval-source-map',
     devServer:{
