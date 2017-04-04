@@ -1,36 +1,61 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var WebpackMd5Hash = require('webpack-md5-hash');
-var path = require('path');
+const path=require('path');
+const webpack=require('webpack');
+const HtmlWebpackPlugin=require('html-webpack-plugin');
+const ExtractTextPlugin=require('extract-text-webpack-plugin');
+const WebpackMd5Hash=require('webpack-md5-hash');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-module.exports = {
+const root_path=path.resolve(__dirname);
+const src_path=path.resolve(__dirname,'src');
+const build_path=path.resolve(__dirname,'public','build');
+
+module.exports={
+    // context:src_path,
+    resolve:{
+        modules:[path.resolve(__dirname, 'node_modules')],
+        alias: {
+            'moment': 'moment/min/moment.min.js',
+            'react': 'react/dist/react.js',
+            'react-dom': 'react-dom/dist/react-dom.js',
+        }
+    },
     entry:{
-         home:path.join(__dirname,'src/bootstrap/main.js'),
+        home:'./src/bootstrap/main.js',
     },
     output:{
-        path:path.join(__dirname,'public','build'),
+        path:build_path,
         filename:'static/[name].[chunkhash:8].js',
+        chunkFilename:'[name].[chunkhash:8].js',
         publicPath:'http://d.ev/',
     },
     module:{
-        loaders:[
+        rules:[
             {
                 test:/\.css$/,
-                loaders:['style','css'],
+                use:[
+                    {
+                        loader:'style-loader',
+                        options:{},
+                    },
+                    {
+                        loader:'css-loader',
+                        options:{}, 
+                    },
+                ]
             }
         ],
+        noParse: /node_modules\/(jquey|moment|chart\.js)/,
     },
     plugins:[
         new HtmlWebpackPlugin({
             title:'webpack',
-            favicon:'./src/resources/common/assets/icon/favicon.ico',
+            favicon:path.resolve(src_path,'resources/common/assets/icon/favicon.ico'),
             minify: {
                 removeAttributeQuotes: true, // 移除属性的引号
             },
             template:'./src/resources/main/index.html',
         }),
-        new webpack.HotModuleReplacementPlugin(),
+        // new webpack.HotModuleReplacementPlugin(),
         new WebpackMd5Hash,
     ],
     devtool:'eval-source-map',
