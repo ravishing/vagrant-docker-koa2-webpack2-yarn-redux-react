@@ -5,6 +5,7 @@ const ExtractTextPlugin=require('extract-text-webpack-plugin');
 const WebpackMd5Hash=require('webpack-md5-hash');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HappyPack=require('happypack');
+// const nodeExternals = require('webpack-node-externals');
 const os=require('os');
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length }); 
 
@@ -46,7 +47,8 @@ module.exports = {
                     ]
                 },
                 {
-                    test:/\.jsx?$/,
+                    test:/\.(j|t)sx?$/,
+                    exclude:[path.resolve(root_path, 'node_modules')],
                     use:[
                         {
                             loader:'happypack/loader',
@@ -55,7 +57,7 @@ module.exports = {
                             },
                         },
                     ]
-                }
+                },
             ],
             noParse: /node_modules\/(jquey|moment|chart\.js)/,
         },
@@ -82,7 +84,7 @@ module.exports = {
             }),
             new HappyPack({
                 id: 'js',
-                loaders: ['babel-loader'],
+                loaders: ['babel-loader',/*'ts-loader'*/],
                 threadPool: happyThreadPool,
                 cache: true,
                 verbose: true,
