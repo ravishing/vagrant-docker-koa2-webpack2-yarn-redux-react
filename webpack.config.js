@@ -1,44 +1,6 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var WebpackMd5Hash = require('webpack-md5-hash');
-var path = require('path');
+const config=require('./config/webpack/index.js');
 
-module.exports = {
-    entry:{
-         home:path.join(__dirname,'src/bootstrap/main.js'),
-    },
-    output:{
-        path:path.join(__dirname,'public','build'),
-        filename:'static/[name].[chunkhash:8].js',
-        publicPath:'http://d.ev/',
-    },
-    module:{
-        loaders:[
-            {
-                test:/\.css$/,
-                loaders:['style','css'],
-            }
-        ],
-    },
-    plugins:[
-        new HtmlWebpackPlugin({
-            title:'webpack',
-            favicon:'./src/resources/common/assets/icon/favicon.ico',
-            minify: {
-                removeAttributeQuotes: true, // 移除属性的引号
-            },
-            template:'./src/resources/main/index.html',
-        }),
-        new webpack.HotModuleReplacementPlugin(),
-        new WebpackMd5Hash,
-    ],
-    devtool:'eval-source-map',
-    devServer:{
-        historyApiFallback:true,
-        hot:true,
-        inline:true,
-        host:'0.0.0.0',
-        port:'80',
-    },
-};
+module.exports = env=>{
+    console.log(env);
+    return config[env.ENV_MODE];
+}
