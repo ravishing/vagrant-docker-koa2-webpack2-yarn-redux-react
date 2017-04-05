@@ -21,8 +21,8 @@ module.exports = {
             modules:[path.resolve(root_path, 'node_modules')],
             alias: {
                 'moment': 'moment/min/moment.min.js',
-                'react': 'react/dist/react.js',
-                'react-dom': 'react-dom/dist/react-dom.js',
+                'react': 'react/dist/react.min.js',
+                'react-dom': 'react-dom/dist/react-dom.min.js',
             }
         },
         output:{
