@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "express": "node ./server/express-server.js",
-    "koa2": "node ./server/koa-server.js",
+    "koa2": "node ./server/koa-server.js --env=development",
     "dev": "npm run koa2",
     "review": "npm run webpack && npm run dev",
-    "webpack": "rm -rf ./public/build/* && webpack"
+    "webpack": "rm -rf ./public/build/* && webpack --env.ENV_MODE=development"
   },
   "author": "wanghongxin",
   "license": "ISC",
