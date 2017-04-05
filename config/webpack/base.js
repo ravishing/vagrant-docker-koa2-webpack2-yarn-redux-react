@@ -4,6 +4,10 @@ const HtmlWebpackPlugin=require('html-webpack-plugin');
 const ExtractTextPlugin=require('extract-text-webpack-plugin');
 const WebpackMd5Hash=require('webpack-md5-hash');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const HappyPack=require('happypack');
+const os=require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length }); 
+
 const env=require('../constants/env.js');
 
 const root_path=env.root_path;
@@ -40,6 +44,17 @@ module.exports = {
                             options:{}, 
                         },
                     ]
+                },
+                {
+                    test:/\.jsx?$/,
+                    use:[
+                        {
+                            loader:'happypack/loader',
+                            options:{
+                                id:'js',
+                            },
+                        },
+                    ]
                 }
             ],
             noParse: /node_modules\/(jquey|moment|chart\.js)/,
@@ -65,5 +80,12 @@ module.exports = {
                     );
                 }
             }),
+            new HappyPack({
+                id: 'js',
+                loaders: ['babel-loader'],
+                threadPool: happyThreadPool,
+                cache: true,
+                verbose: true,
+            })
         ]
     };
