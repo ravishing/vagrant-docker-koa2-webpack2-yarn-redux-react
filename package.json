@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "express": "node ./server/express-server.js",
-    "koa2": "node ./server/koa-server.js --env=development",
+    "express": "node ./scripts/server/express-server.js --env=development",
+    "koa2": "node ./scripts/server/koa-server.js --env=development",
     "dev": "npm run koa2",
     "review": "npm run webpack && npm run dev",
-    "webpack": "rm -rf ./public/build/* && webpack --env.ENV_MODE=development"
+    "webpack": "rm -rf ./public/build/* && webpack --env.ENV_MODE=development",
+    "build": "rm -rf ./public/build/* && webpack --env.ENV_MODE=production"
   },
   "author": "wanghongxin",
   "license": "ISC",
