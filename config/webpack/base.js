@@ -47,11 +47,23 @@ module.exports = {
         plugins:[
             new HtmlWebpackPlugin({
                 title:'webpack2',
-                favicon:path.resolve(src_path,'resources/common/assets/icon/favicon.ico'),
+                favicon:path.resolve(src_path,'assets/icon/favicon.ico'),
                 minify: {
                     removeAttributeQuotes: true, // 移除属性的引号
                 },
-                template:path.resolve(src_path,'./resources/main/index.html'),
+                template:path.resolve(src_path,'./view/main/index.html'),
+            }),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendors',
+                minChunks(module, count) {
+                    return (
+                        module.resource &&
+                        /\.(j|t)sx?$/.test(module.resource) &&
+                        module.resource.indexOf(
+                            path.resolve(root_path, 'node_modules')
+                        ) === 0
+                    );
+                }
             }),
         ]
     };
