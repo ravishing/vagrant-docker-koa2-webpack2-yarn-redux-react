@@ -1,4 +1,5 @@
 const UglifyJsParallelPlugin = require('webpack-uglify-parallel');
+const webpack=require('webpack');
 const os = require('os');
 module.exports={
     output:{
@@ -15,5 +16,10 @@ module.exports={
                 drop_debugger: true
             }
         }),
+        new webpack.BannerPlugin(
+`author:wanghongxin
+e-mail:wanghongxin@outlook.com
+Copyrigh wanghongxin | Released under MIT license
+*`      ),
     ],
 };
